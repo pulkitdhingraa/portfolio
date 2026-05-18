@@ -85,14 +85,14 @@ export default function Certifications() {
       </div>
 
       <div className="text-[11px] font-semibold tracking-[2px] uppercase text-teal-600 mb-4">Earned</div>
-      <div className="flex gap-7 flex-wrap items-center">
+      <div className="flex gap-x-7 gap-y-6 flex-wrap items-start md:items-center">
         {certifications.earned.map(cert => (
           <CertBadge key={cert.name} cert={cert} type="earned" />
         ))}
       </div>
 
       <div className="text-[11px] font-semibold tracking-[2px] uppercase text-indigo-500 mb-4 mt-9">Pursuing</div>
-      <div className="flex gap-7 flex-wrap items-center">
+      <div className="flex gap-x-7 gap-y-6 flex-wrap items-start md:items-center">
         {certifications.pursuing.map(cert => (
           <CertBadge key={cert.name} cert={cert} type="pursuing" />
         ))}
