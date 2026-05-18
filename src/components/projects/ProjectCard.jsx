@@ -7,7 +7,7 @@ export default function ProjectCard({ project }) {
         transition-all duration-350 ease-[cubic-bezier(.22,.68,0,.98)]
         hover:-translate-y-1.5 hover:shadow-[0_24px_48px_rgba(0,0,0,0.06),0_0_40px_rgba(13,148,136,0.06)]
         hover:border-[rgba(13,148,136,0.25)]
-        ${tall ? 'row-span-2' : ''} ${wide ? 'col-span-2' : ''}`}
+        ${tall ? 'md:row-span-2' : ''} ${wide ? 'md:col-span-2' : ''}`}
     >
       <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-teal-600 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
       <div className="font-mono text-[64px] font-bold text-[rgba(13,148,136,0.05)] absolute -top-2.5 right-4 leading-none pointer-events-none group-hover:text-[rgba(13,148,136,0.09)] transition-colors duration-400">

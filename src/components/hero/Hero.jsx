@@ -4,16 +4,16 @@ import ScrollIndicator from '../ScrollIndicator'
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center px-[60px] pt-[120px] pb-[80px] overflow-hidden">
+    <section className="relative min-h-screen flex items-center px-5 md:px-[60px] pt-24 md:pt-[120px] pb-12 md:pb-[80px] overflow-hidden">
       <ParticleGrid />
-      <div className="relative z-[1] flex justify-between items-center w-full max-w-[1200px] mx-auto gap-[60px]">
-        <div className="flex-1">
+      <div className="relative z-[1] flex flex-col md:flex-row justify-between items-center w-full max-w-[1200px] mx-auto gap-10 md:gap-[60px]">
+        <div className="flex-1 w-full">
           <div className="inline-flex items-center gap-2 text-[11px] tracking-[2px] text-teal-600 uppercase mb-5">
             <div className="w-1.5 h-1.5 bg-teal-600 rounded-full" style={{ animation: 'pulse 2s ease-in-out infinite' }} />
             Available for opportunities
           </div>
-          <div className="text-[104px] font-black leading-[0.95] tracking-[-4px] text-[#1A1A1A]">PULKIT</div>
-          <div className="text-[104px] font-black leading-[0.95] tracking-[-4px] text-gray-300">DHINGRA</div>
+          <div className="text-[52px] sm:text-[72px] lg:text-[104px] font-black leading-[0.95] tracking-[-2px] md:tracking-[-4px] text-[#1A1A1A]">PULKIT</div>
+          <div className="text-[52px] sm:text-[72px] lg:text-[104px] font-black leading-[0.95] tracking-[-2px] md:tracking-[-4px] text-gray-300">DHINGRA</div>
           <div className="flex items-center gap-3 my-6">
             <div className="w-10 h-0.5 bg-[#1A1A1A]" />
             <span className="text-[13px] tracking-[2px] font-semibold">DEVSECOPS ENGINEER</span>
@@ -28,7 +28,7 @@ export default function Hero() {
               </span>
             ))}
           </div>
-          <div className="flex gap-3 mt-7">
+          <div className="flex flex-wrap gap-3 mt-7">
             <a href="#contact" className="inline-flex items-center gap-2 bg-teal-600 text-white px-7 py-3 rounded-full text-xs font-semibold tracking-[0.5px] hover:bg-teal-700 hover:-translate-y-px transition-all">
               COLLABORATE &rarr;
             </a>
@@ -43,7 +43,7 @@ export default function Hero() {
             </a>
           </div>
         </div>
-        <div className="flex-none w-[480px]">
+        <div className="hidden md:block flex-none w-[360px] lg:w-[480px]">
           <InfinityLoop />
         </div>
       </div>

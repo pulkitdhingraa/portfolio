@@ -9,9 +9,9 @@ const NAV_LINKS = [
 
 export default function Footer({ onSecretClick }) {
   return (
-    <footer className="bg-gradient-to-b from-[#1A1A1A] to-[#111111] px-[60px] pt-5 pb-4">
+    <footer className="bg-gradient-to-b from-[#1A1A1A] to-[#111111] px-5 md:px-[60px] pt-5 pb-4">
       <div className="max-w-[1200px] mx-auto">
-        <div className="flex justify-between items-center mb-3">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-3">
           <div className="text-base font-black text-white tracking-[-0.5px]">
             PULKIT{' '}
             <button
@@ -39,8 +39,8 @@ export default function Footer({ onSecretClick }) {
             </svg>
           </button>
         </div>
-        <div className="border-t border-[#222] pt-3 flex justify-between items-center">
-          <div className="flex gap-6">
+        <div className="border-t border-[#222] pt-3 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+          <div className="flex gap-4 sm:gap-6 flex-wrap">
             {NAV_LINKS.map(link => (
               <a key={link.href} href={link.href} className="text-[11px] text-[#4B5563] no-underline hover:text-gray-400 transition-colors">
                 {link.label}

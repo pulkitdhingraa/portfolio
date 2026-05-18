@@ -18,7 +18,7 @@ const icons = {
 
 export default function SocialStrip() {
   return (
-    <div className="fixed right-10 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-8 items-center">
+    <div className="hidden lg:flex fixed right-10 top-1/2 -translate-y-1/2 z-50 flex-col gap-8 items-center">
       <div className="w-px h-[60px] bg-gray-200" />
       <a href="https://github.com/pulkitdhingraa" className="text-gray-400 hover:text-teal-600 transition-colors">{icons.github}</a>
       <a href="https://linkedin.com/in/pulkitdhingraa" className="text-gray-400 hover:text-teal-600 transition-colors">{icons.linkedin}</a>

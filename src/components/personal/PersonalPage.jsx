@@ -150,7 +150,7 @@ export default function PersonalPage({ visible, onExit }) {
         color: '#fafafa',
       }}
     >
-      {personal.starfield && <Starfield />}
+      {personal.starfield && <div className="hidden md:block"><Starfield /></div>}
 
       {personal.aurora && (
         <div className="fixed inset-0 z-[1] pointer-events-none">
@@ -199,18 +199,18 @@ export default function PersonalPage({ visible, onExit }) {
       </div>
 
       {/* Main layout */}
-      <div className="min-h-screen flex flex-col items-center justify-center p-8 relative z-[2]" style={{ animation: 'ppFadeUp 0.5s ease forwards' }}>
-        <div className="grid gap-8 max-w-[1100px] w-full items-start" style={{ gridTemplateColumns: '1fr 320px 1fr' }}>
+      <div className="min-h-screen flex flex-col items-center justify-center p-4 md:p-8 pt-16 md:pt-8 relative z-[2]" style={{ animation: 'ppFadeUp 0.5s ease forwards' }}>
+        <div className="pp-bento grid gap-4 md:gap-8 max-w-[1100px] w-full items-start">
 
-          {/* Left sidebar — top aligned with name (below avatar 88px + mb-5 20px) */}
-          <div className="grid grid-cols-2 gap-3 content-start pt-[108px]">
+          {/* Left sidebar — top aligned with name on desktop only */}
+          <div className="pp-side grid grid-cols-2 gap-3 content-start lg:pt-[108px]">
             {personal.photography && <PhotographyCard2 />}
             {personal.books && <BooksCard />}
             {personal.youtube && <YouTubeCard />}
           </div>
 
           {/* Center profile */}
-          <div className="flex flex-col items-center text-center">
+          <div className="pp-center flex flex-col items-center text-center">
             <div className="w-[104px] h-[104px] rounded-full mb-5 overflow-hidden bg-white hover:opacity-80 transition-opacity flex items-center justify-center">
               <img
                 src={personalLinks.avatar}
@@ -254,8 +254,8 @@ export default function PersonalPage({ visible, onExit }) {
             )}
           </div>
 
-          {/* Right sidebar — top aligned with name */}
-          <div className="grid grid-cols-2 gap-3 content-start pt-[108px]">
+          {/* Right sidebar — top aligned with name on desktop only */}
+          <div className="pp-side grid grid-cols-2 gap-3 content-start lg:pt-[108px]">
             {personal.games && <GamesCard />}
             {personal.anime && <AnimeCard />}
             {personal.music && <MusicCard />}

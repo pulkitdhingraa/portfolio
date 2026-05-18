@@ -183,7 +183,7 @@ export default function OrbitalSphere() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-[500px] max-w-[1200px] mx-auto overflow-hidden cursor-grab active:cursor-grabbing"
+      className="relative w-full h-[360px] md:h-[500px] max-w-[1200px] mx-auto overflow-hidden cursor-grab active:cursor-grabbing"
     >
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
       <div

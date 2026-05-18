@@ -156,6 +156,37 @@ html.dark .pro-root .text-\[rgba\(0\,0\,0\,0\.05\)\] { color: rgba(255,255,255,0
   -webkit-text-fill-color: #fafafa;
 }
 
+/* ─── Personal page responsive bento grid ─── */
+/* Mobile: single column, center profile first */
+.pp-bento {
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "center"
+    "left"
+    "right";
+}
+.pp-bento .pp-center { grid-area: center; }
+.pp-bento .pp-side:nth-of-type(1) { grid-area: left; }
+.pp-bento .pp-side:nth-of-type(3) { grid-area: right; }
+
+/* Tablet+ : two-column with center stretching */
+@media (min-width: 768px) {
+  .pp-bento {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "center center"
+      "left   right";
+  }
+}
+
+/* Desktop: original 3-column kuchizu bento */
+@media (min-width: 1024px) {
+  .pp-bento {
+    grid-template-columns: 1fr 320px 1fr;
+    grid-template-areas: "left center right";
+  }
+}
+
 /* Personal page card base style */
 .pp-card {
   padding: 0.75rem;

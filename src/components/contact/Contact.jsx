@@ -1,11 +1,11 @@
 export default function Contact() {
   return (
-    <section className="max-w-[1200px] mx-auto px-[60px] py-[100px] pb-20 text-center relative overflow-hidden" id="contact">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[220px] font-black tracking-[-10px] text-[rgba(13,148,136,0.04)] whitespace-nowrap pointer-events-none select-none">
+    <section className="max-w-[1200px] mx-auto px-5 md:px-[60px] py-16 md:py-[100px] pb-12 md:pb-20 text-center relative overflow-hidden" id="contact">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[110px] sm:text-[160px] md:text-[220px] font-black tracking-[-6px] md:tracking-[-10px] text-[rgba(13,148,136,0.04)] whitespace-nowrap pointer-events-none select-none">
         CONNECT
       </div>
       <div className="relative text-[11px] tracking-[3px] uppercase text-gray-400 mb-2">Get In Touch</div>
-      <div className="relative text-[42px] font-black tracking-[-1.5px] mb-12">
+      <div className="relative text-[32px] md:text-[42px] font-black tracking-[-1.5px] mb-8 md:mb-12">
         Let's <em className="font-accent text-gray-500">Connect</em>
       </div>
       <p className="relative text-base text-gray-500 leading-[1.8] max-w-[500px] mx-auto mb-10">

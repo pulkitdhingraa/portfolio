@@ -1,19 +1,19 @@
 export default function About() {
   return (
-    <section className="max-w-[1200px] mx-auto px-[60px] py-20" id="about">
+    <section className="max-w-[1200px] mx-auto px-5 md:px-[60px] py-12 md:py-20" id="about">
       <div className="text-[11px] tracking-[3px] uppercase text-gray-400 mb-2">Biography</div>
-      <div className="text-[42px] font-black tracking-[-1.5px] mb-12">
+      <div className="text-[32px] md:text-[42px] font-black tracking-[-1.5px] mb-8 md:mb-12">
         What I <em className="font-accent text-gray-500">Automate</em>
       </div>
-      <div className="flex gap-[60px] items-start">
-        <div className="flex-none w-[280px]">
+      <div className="flex flex-col md:flex-row gap-8 md:gap-[60px] items-center md:items-start">
+        <div className="flex-none w-[220px] md:w-[280px]">
           <img
             src="/anime-portrait.png"
             alt="Pulkit Dhingra"
-            className="w-[280px] h-[340px] rounded-lg object-cover"
+            className="w-full h-auto md:h-[340px] rounded-lg object-cover"
           />
         </div>
-        <div className="flex-1">
+        <div className="flex-1 w-full">
           <div className="text-[10px] tracking-[2px] uppercase text-teal-600 mb-4 font-semibold">
             &bull; DevSecOps Engineer
           </div>
@@ -37,7 +37,7 @@ export default function About() {
               <span className="text-[13px] font-semibold text-[#1A1A1A]">Open to Work</span>
             </div>
           </div>
-          <div className="flex items-center justify-between gap-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6">
             <div className="flex gap-2.5 flex-wrap">
               {['Automation', 'IaC', 'Cloud Security', 'GitOps', 'SRE', 'Compliance'].map(tag => (
                 <span key={tag} className="text-[11px] px-3.5 py-1.5 rounded-[20px] bg-gray-100 text-gray-500 font-medium">

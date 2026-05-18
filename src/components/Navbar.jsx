@@ -26,7 +26,7 @@ export default function Navbar({ onSecretClick }) {
   const { dark, toggle } = useTheme()
 
   return (
-    <nav className="nav-root fixed top-0 left-0 right-0 z-[100] flex justify-between items-center px-[60px] py-5 bg-[rgba(250,250,250,0.85)] backdrop-blur-[12px] border-b border-gray-100">
+    <nav className="nav-root fixed top-0 left-0 right-0 z-[100] flex justify-between items-center px-5 md:px-[60px] py-4 md:py-5 bg-[rgba(250,250,250,0.85)] backdrop-blur-[12px] border-b border-gray-100">
       <div className="text-sm font-black tracking-tight">
         PULKIT{' '}
         <button onClick={onSecretClick} className="group font-normal text-gray-400 cursor-default hover:cursor-pointer hover:brightness-110 transition-[filter] duration-300 bg-transparent border-none p-0">
@@ -41,8 +41,8 @@ export default function Navbar({ onSecretClick }) {
           ))}
         </button>
       </div>
-      <div className="flex items-center gap-8">
-        <ul className="flex gap-8 list-none">
+      <div className="flex items-center gap-4 md:gap-8">
+        <ul className="hidden md:flex gap-8 list-none">
           {NAV_SECTIONS.map(id => (
             <li key={id}>
               <a
