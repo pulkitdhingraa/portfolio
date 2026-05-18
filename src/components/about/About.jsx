@@ -39,7 +39,7 @@ export default function About() {
           </div>
           <div className="flex items-center justify-between gap-6">
             <div className="flex gap-2.5 flex-wrap">
-              {['CI/CD', 'IaC', 'Cloud Security', 'Kubernetes', 'Monitoring', 'Compliance'].map(tag => (
+              {['Automation', 'IaC', 'Cloud Security', 'GitOps', 'SRE', 'Compliance'].map(tag => (
                 <span key={tag} className="text-[11px] px-3.5 py-1.5 rounded-[20px] bg-gray-100 text-gray-500 font-medium">
                   {tag}
                 </span>

@@ -2,12 +2,83 @@
 
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Inter', system-ui, sans-serif;
   background: #FAFAFA;
   color: #1A1A1A;
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+/* ─── Night Mode (main portfolio) ─── */
+html.dark body {
+  background: #0A0A0A;
+  color: #E5E5E5;
+}
+
+html.dark .nav-root {
+  background: rgba(10, 10, 10, 0.85) !important;
+  border-bottom-color: #1f1f1f !important;
+}
+
+html.dark .theme-toggle {
+  border-color: #2a2a2a;
+  color: #a1a1a1;
+}
+html.dark .theme-toggle:hover {
+  color: #fafafa;
+  border-color: #525252;
+}
+
+/* ─── Pro portfolio dark mode (scoped to .pro-root) ─── */
+
+/* Surfaces */
+html.dark .pro-root .bg-white,
+html.dark .pro-root .bg-\[\#F0FDFA\] { background-color: #141414 !important; }
+html.dark .pro-root .bg-gray-50 { background-color: #181818 !important; }
+html.dark .pro-root .bg-gray-100 { background-color: #1f1f1f !important; }
+html.dark .pro-root .bg-white\/60 { background-color: rgba(20,20,20,0.6) !important; }
+/* bg-[#1A1A1A] intentionally NOT inverted — used for code blocks & tooltips that should stay dark */
+
+/* Text */
+html.dark .pro-root .text-\[\#1A1A1A\],
+html.dark .pro-root .text-black,
+html.dark .pro-root .text-gray-900,
+html.dark .pro-root .text-gray-800 { color: #f4f4f5 !important; }
+html.dark .pro-root .text-gray-700 { color: #d4d4d8 !important; }
+html.dark .pro-root .text-gray-600 { color: #a1a1aa !important; }
+html.dark .pro-root .text-gray-500 { color: #8b8b8f !important; }
+html.dark .pro-root .text-gray-400 { color: #6b6b70 !important; }
+html.dark .pro-root .text-\[\#4B5563\] { color: #a1a1aa !important; }
+html.dark .pro-root .text-\[\#6B7280\] { color: #8b8b8f !important; }
+html.dark .pro-root .text-\[\#333\] { color: #555 !important; }
+
+/* Borders + small bg utilities (divider, social strip rules) */
+html.dark .pro-root .border-gray-100 { border-color: #1f1f1f !important; }
+html.dark .pro-root .border-gray-200 { border-color: #2a2a2a !important; }
+html.dark .pro-root .border-gray-300 { border-color: #3a3a3a !important; }
+html.dark .pro-root .bg-gray-200 { background-color: #2a2a2a !important; }
+html.dark .pro-root .bg-gray-300 { background-color: #3a3a3a !important; }
+html.dark .pro-root .border-\[\#F0F0F0\] { border-color: #1f1f1f !important; }
+html.dark .pro-root .border-\[\#FAFAFA\] { border-color: #0a0a0a !important; }
+html.dark .pro-root .border-\[\#333\] { border-color: #2a2a2a !important; }
+html.dark .pro-root .border-\[\#222\] { border-color: #1a1a1a !important; }
+html.dark .pro-root .border-\[\#1A1A1A\] { border-color: #e5e5e5 !important; }
+
+/* Hover states */
+html.dark .pro-root .hover\:bg-gray-50:hover { background-color: #1f1f1f !important; }
+
+/* Footer (already dark gradient — make it slightly different so it doesn't blend with body) */
+html.dark .pro-root footer { background: linear-gradient(180deg, #050505, #000000) !important; }
+
+/* Faded watermarks / decorative text */
+html.dark .pro-root .text-\[rgba\(0\,0\,0\,0\.03\)\],
+html.dark .pro-root .text-\[rgba\(0\,0\,0\,0\.04\)\],
+html.dark .pro-root .text-\[rgba\(0\,0\,0\,0\.05\)\] { color: rgba(255,255,255,0.04) !important; }
 
 .font-mono {
   font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
@@ -68,6 +139,21 @@ body {
 @keyframes ppRgbShift {
   0% { background-position: 0% 50%; }
   100% { background-position: 300% 50%; }
+}
+
+/* Personal page RGB DHINGRA — hover turns white */
+.pp-rgb-dhingra {
+  background: linear-gradient(90deg, #ff0040, #aa44ff, #00d4ff, #ff0040);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: ppRgbShift 3s linear infinite;
+  transition: all 0.2s ease;
+}
+.pp-rgb-dhingra:hover {
+  background: none;
+  -webkit-text-fill-color: #fafafa;
 }
 
 /* Personal page card base style */

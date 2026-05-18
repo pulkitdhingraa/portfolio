@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, Fragment } from 'react'
 import Navbar from './components/Navbar'
 import SocialStrip from './components/SocialStrip'
 import Hero from './components/hero/Hero'
@@ -13,6 +13,7 @@ import Contact from './components/contact/Contact'
 import Footer from './components/footer/Footer'
 import GlitchTransition from './components/personal/GlitchTransition'
 import PersonalPage from './components/personal/PersonalPage'
+import { sections } from './config/sections'
 
 export default function App() {
   const [page, setPage] = useState('pro') // 'pro' | 'transitioning' | 'personal'
@@ -27,31 +28,38 @@ export default function App() {
   }
 
   const handleExitPersonal = () => {
+    document.documentElement.style.overflow = ''
     setPage('pro')
     window.scrollTo(0, 0)
   }
 
+  const { main } = sections
+
+  // Build the ordered list of enabled sections, then interleave dividers.
+  const sectionNodes = [
+    main.hero && <Hero key="hero" />,
+    main.about && <About key="about" />,
+    main.techStack && <TechStack key="techstack" />,
+    main.projects && <Projects key="projects" />,
+    main.experience && <Experience key="experience" />,
+    main.certifications && <Certifications key="certifications" />,
+    main.blog && <Blog key="blog" />,
+    main.contact && <Contact key="contact" />,
+  ].filter(Boolean)
+
   return (
     <>
       {page !== 'personal' && (
-        <div style={{ visibility: page === 'transitioning' ? 'hidden' : 'visible' }}>
+        <div className="pro-root" style={{ visibility: page === 'transitioning' ? 'hidden' : 'visible' }}>
           <Navbar onSecretClick={handleSecretClick} />
-          <SocialStrip />
-          <Hero />
-          <About />
-          <SectionDivider />
-          <TechStack />
-          <SectionDivider />
-          <Projects />
-          <SectionDivider />
-          <Experience />
-          <SectionDivider />
-          <Certifications />
-          <SectionDivider />
-          <Blog />
-          <SectionDivider />
-          <Contact />
-          <Footer onSecretClick={handleSecretClick} />
+          {main.socialStrip && <SocialStrip />}
+          {sectionNodes.map((node, i) => (
+            <Fragment key={node.key}>
+              {i > 0 && <SectionDivider />}
+              {node}
+            </Fragment>
+          ))}
+          {main.footer && <Footer onSecretClick={handleSecretClick} />}
         </div>
       )}
 

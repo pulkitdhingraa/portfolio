@@ -4,7 +4,13 @@ export default function MusicCard() {
   return (
     <div className="pp-card flex flex-col">
       <div className="flex items-center gap-2 mb-2">
-        <img className="w-8 h-8 rounded object-cover flex-shrink-0" src={personalLinks.musicAvatar} alt="Cid Kagenou" />
+        <img
+          className="w-8 h-8 rounded object-cover flex-shrink-0"
+          src={personalLinks.musicAvatar}
+          alt=""
+          referrerPolicy="no-referrer"
+          style={{ objectPosition: 'center 25%' }}
+        />
         <div>
           <div className="text-[0.75rem] font-medium text-[#fafafa]">300i</div>
           <div className="text-[0.6rem] text-[#aa44ff]">listening</div>

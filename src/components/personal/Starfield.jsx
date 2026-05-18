@@ -13,6 +13,7 @@ export default function Starfield() {
     const c = canvasRef.current
     const ctx = c.getContext('2d')
     let animId
+    let cssW = 0, cssH = 0
 
     const stars = []
     for (let i = 0; i < COUNT; i++) {
@@ -27,16 +28,25 @@ export default function Starfield() {
     }
 
     function resize() {
-      c.width = window.innerWidth
-      c.height = window.innerHeight
+      const dpr = Math.min(window.devicePixelRatio || 1, 2)
+      cssW = window.innerWidth
+      cssH = window.innerHeight
+      c.width = Math.round(cssW * dpr)
+      c.height = Math.round(cssH * dpr)
+      c.style.width = cssW + 'px'
+      c.style.height = cssH + 'px'
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+      // Solid fill once so the first trail frame doesn't show clear pixels
+      ctx.fillStyle = '#09090b'
+      ctx.fillRect(0, 0, cssW, cssH)
     }
     resize()
     window.addEventListener('resize', resize)
 
     function draw() {
-      ctx.fillStyle = 'rgba(9,9,11,0.08)'
-      ctx.fillRect(0, 0, c.width, c.height)
-      const cx = c.width / 2, cy = c.height / 2
+      ctx.fillStyle = 'rgba(9,9,11,0.16)'
+      ctx.fillRect(0, 0, cssW, cssH)
+      const cx = cssW / 2, cy = cssH / 2
 
       for (const s of stars) {
         s.pz = s.z
@@ -49,12 +59,15 @@ export default function Starfield() {
           s.r = col[0]; s.g = col[1]; s.b = col[2]
           continue
         }
+        const progress = 1 - s.z / MAX_Z
+        // Skip very faint, sub-pixel stars — they show up as grey hairlines, not streaks
+        if (progress < 0.15) continue
+
         const sx = (s.x / s.z) * cx + cx
         const sy = (s.y / s.z) * cy + cy
         const px = (s.x / s.pz) * cx + cx
         const py = (s.y / s.pz) * cy + cy
-        const progress = 1 - s.z / MAX_Z
-        const size = progress * 2
+        const size = Math.max(progress * 2, 0.6)
         const alpha = progress * 0.7
 
         ctx.strokeStyle = `rgba(${s.r},${s.g},${s.b},${alpha})`
@@ -68,7 +81,8 @@ export default function Starfield() {
       }
       animId = requestAnimationFrame(draw)
     }
-    draw()
+    // Defer first draw by one frame so layout has settled after the glitch transition
+    animId = requestAnimationFrame(draw)
 
     return () => {
       cancelAnimationFrame(animId)
@@ -76,5 +90,10 @@ export default function Starfield() {
     }
   }, [])
 
-  return <canvas ref={canvasRef} className="fixed inset-0 z-0" />
+  return (
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 z-0 w-screen h-screen pointer-events-none"
+    />
+  )
 }

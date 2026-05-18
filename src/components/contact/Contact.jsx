@@ -12,7 +12,7 @@ export default function Contact() {
         Have a project in mind or just want to chat about DevSecOps? I'm always open to discussing new opportunities and ideas.
       </p>
       <a
-        href="mailto:hello@pulkitdhingra.com"
+        href="mailto:pulkitdhngra@gmail.com"
         className="relative inline-flex items-center gap-2.5 bg-teal-600 text-white px-9 py-4 rounded-[32px] text-[13px] font-semibold tracking-[0.5px] no-underline hover:bg-teal-700 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(13,148,136,0.2)] transition-all border-none cursor-pointer"
       >
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

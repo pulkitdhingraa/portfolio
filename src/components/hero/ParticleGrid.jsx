@@ -7,15 +7,26 @@ export default function ParticleGrid() {
   useEffect(() => {
     const canvas = canvasRef.current
     const ctx = canvas.getContext('2d')
+    const parent = canvas.parentElement
     const GRID = 50, GLOW = 120
     let animId
 
     function resize() {
-      canvas.width = canvas.parentElement.offsetWidth
-      canvas.height = canvas.parentElement.offsetHeight
+      canvas.width = parent.offsetWidth
+      canvas.height = parent.offsetHeight
     }
     resize()
     window.addEventListener('resize', resize)
+
+    function handleMove(e) {
+      const rect = canvas.getBoundingClientRect()
+      mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top }
+    }
+    function handleLeave() {
+      mouseRef.current = { x: -1000, y: -1000 }
+    }
+    parent.addEventListener('mousemove', handleMove)
+    parent.addEventListener('mouseleave', handleLeave)
 
     function draw() {
       const { width: w, height: h } = canvas
@@ -69,18 +80,18 @@ export default function ParticleGrid() {
       animId = requestAnimationFrame(draw)
     }
     draw()
-    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', resize) }
+    return () => {
+      cancelAnimationFrame(animId)
+      window.removeEventListener('resize', resize)
+      parent.removeEventListener('mousemove', handleMove)
+      parent.removeEventListener('mouseleave', handleLeave)
+    }
   }, [])
 
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full z-0"
-      onMouseMove={(e) => {
-        const rect = canvasRef.current.getBoundingClientRect()
-        mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top }
-      }}
-      onMouseLeave={() => { mouseRef.current = { x: -1000, y: -1000 } }}
+      className="absolute inset-0 w-full h-full z-0 pointer-events-none"
     />
   )
 }

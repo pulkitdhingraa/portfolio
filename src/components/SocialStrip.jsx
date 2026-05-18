@@ -22,7 +22,7 @@ export default function SocialStrip() {
       <div className="w-px h-[60px] bg-gray-200" />
       <a href="https://github.com/pulkitdhingraa" className="text-gray-400 hover:text-teal-600 transition-colors">{icons.github}</a>
       <a href="https://linkedin.com/in/pulkitdhingraa" className="text-gray-400 hover:text-teal-600 transition-colors">{icons.linkedin}</a>
-      <a href="mailto:hello@pulkitdhingra.com" className="text-gray-400 hover:text-teal-600 transition-colors">{icons.email}</a>
+      <a href="mailto:pulkitdhngra@gmail.com" className="text-gray-400 hover:text-teal-600 transition-colors">{icons.email}</a>
       <div className="w-px h-[60px] bg-gray-200" />
     </div>
   )

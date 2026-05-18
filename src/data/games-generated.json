@@ -1,0 +1,22 @@
+{
+  "generatedAt": "2026-05-18T16:59:49.494Z",
+  "steamId": "76561198848372743",
+  "totalGames": 25,
+  "games": [
+    {
+      "name": "Deadlock",
+      "hours": "303 hrs",
+      "img": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1422450/header.jpg"
+    },
+    {
+      "name": "Marvel Rivals",
+      "hours": "266 hrs",
+      "img": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2767030/header.jpg"
+    },
+    {
+      "name": "Battlefield™ 6",
+      "hours": "144 hrs",
+      "img": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2807960/library_hero.jpg"
+    }
+  ]
+}

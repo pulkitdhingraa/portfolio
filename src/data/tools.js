@@ -20,7 +20,7 @@ export const tools = [
   { name: 'Python', img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
   { name: 'Bash', img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg' },
   { name: 'Go', img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg' },
-  { name: 'Coverity', img: '/logo/coverity.jpg' },
+  { name: 'Coverity', img: '/logo/blackduck.jpg' },
   { name: 'Mend', img: '/logo/mend.png' },
   { name: 'SonarQube', img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sonarqube/sonarqube-original.svg' },
   { name: 'Contrast', img: '/logo/contrast.png' },

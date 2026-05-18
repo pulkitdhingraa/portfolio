@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "sync:steam": "node scripts/fetch-steam.mjs",
+    "prebuild": "node scripts/fetch-steam.mjs || echo '[steam] sync skipped'"
   },
   "dependencies": {
     "react": "^18.3.1",

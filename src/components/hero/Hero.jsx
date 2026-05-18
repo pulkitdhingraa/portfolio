@@ -22,7 +22,7 @@ export default function Hero() {
             Securing cloud-native infrastructure with a focus on automation, compliance, and zero-trust architecture.
           </p>
           <div className="flex gap-2 flex-wrap my-5">
-            {['AWS', 'Kubernetes', 'Terraform', 'CI/CD', 'SIEM'].map(tag => (
+            {['AWS', 'Kubernetes', 'Terraform', 'CI/CD', 'Observability'].map(tag => (
               <span key={tag} className="text-[11px] font-mono px-3 py-1 border border-gray-200 rounded text-gray-500 bg-white/60">
                 {tag}
               </span>
@@ -32,7 +32,13 @@ export default function Hero() {
             <a href="#contact" className="inline-flex items-center gap-2 bg-teal-600 text-white px-7 py-3 rounded-full text-xs font-semibold tracking-[0.5px] hover:bg-teal-700 hover:-translate-y-px transition-all">
               COLLABORATE &rarr;
             </a>
-            <a href="#" className="inline-flex items-center gap-2 bg-white text-[#1A1A1A] px-7 py-3 rounded-full text-xs font-semibold tracking-[0.5px] border-[1.5px] border-[#1A1A1A] hover:bg-gray-50 hover:-translate-y-px transition-all">
+            <a
+              href="/Resume.pdf"
+              download="Pulkit-Dhingra-Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-white text-[#1A1A1A] px-7 py-3 rounded-full text-xs font-semibold tracking-[0.5px] border-[1.5px] border-[#1A1A1A] hover:bg-gray-50 hover:-translate-y-px transition-all"
+            >
               RESUME &darr;
             </a>
           </div>

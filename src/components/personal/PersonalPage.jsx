@@ -1,12 +1,94 @@
 import { useState, useEffect } from 'react'
 import Starfield from './Starfield'
-import AnimeGraph from './AnimeGraph'
-import SportsCard from './SportsCard'
-import PhotographyCard from './PhotographyCard'
+import PhotographyCard2 from './PhotographyCard2'
+import BooksCard from './BooksCard'
+import YouTubeCard from './YouTubeCard'
 import GamesCard from './GamesCard'
 import AnimeCard from './AnimeCard'
 import MusicCard from './MusicCard'
 import { personalLinks } from '../../data/personal'
+import { sections } from '../../config/sections'
+
+const BIO_LINES = [
+  'The Other Side',
+  'linux enthusiast',
+  'certified gamer hours',
+  'weeb in disguise',
+  'cloud native by day',
+  'headshot machine',
+  'ctrl+c ctrl+v engineer',
+]
+
+function TypingBio() {
+  const [lineIdx, setLineIdx] = useState(0)
+  const [charIdx, setCharIdx] = useState(0)
+  const [deleting, setDeleting] = useState(false)
+
+  useEffect(() => {
+    const line = BIO_LINES[lineIdx]
+
+    if (!deleting && charIdx < line.length) {
+      const id = setTimeout(() => setCharIdx(c => c + 1), 80 + Math.random() * 40)
+      return () => clearTimeout(id)
+    }
+
+    if (!deleting && charIdx === line.length) {
+      const id = setTimeout(() => setDeleting(true), 2000)
+      return () => clearTimeout(id)
+    }
+
+    if (deleting && charIdx > 0) {
+      const id = setTimeout(() => setCharIdx(c => c - 1), 40)
+      return () => clearTimeout(id)
+    }
+
+    if (deleting && charIdx === 0) {
+      setDeleting(false)
+      setLineIdx(i => (i + 1) % BIO_LINES.length)
+    }
+  }, [charIdx, deleting, lineIdx])
+
+  return (
+    <p className="text-[#71717a] text-sm mb-2">
+      {BIO_LINES[lineIdx].slice(0, charIdx)}
+      <span className="ml-px" style={{ animation: 'ppBlink 1s step-end infinite' }}>|</span>
+    </p>
+  )
+}
+
+function PageLoadTime() {
+  const [loadTime, setLoadTime] = useState(null)
+
+  useEffect(() => {
+    const entry = performance.getEntriesByType('navigation')[0]
+    if (entry) {
+      setLoadTime(Math.round(entry.loadEventEnd - entry.startTime))
+    } else {
+      setLoadTime(Math.round(performance.now()))
+    }
+  }, [])
+
+  return <>{loadTime !== null ? `loaded in ${loadTime}ms` : '...'}</>
+}
+
+function ScreenRatio() {
+  const [ratio, setRatio] = useState('')
+
+  useEffect(() => {
+    function update() {
+      const w = window.innerWidth
+      const h = window.innerHeight
+      const gcd = (a, b) => b === 0 ? a : gcd(b, a % b)
+      const d = gcd(w, h)
+      setRatio(`${w}×${h} · ${w/d}:${h/d}`)
+    }
+    update()
+    window.addEventListener('resize', update)
+    return () => window.removeEventListener('resize', update)
+  }, [])
+
+  return <>{ratio}</>
+}
 
 function LiveClock() {
   const [time, setTime] = useState('')
@@ -55,6 +137,7 @@ const socialIcons = {
 }
 
 export default function PersonalPage({ visible, onExit }) {
+  const { personal } = sections
   return (
     <div
       className={`fixed inset-0 z-[400] overflow-y-auto bg-[#09090b] transition-opacity duration-500 ${
@@ -67,74 +150,77 @@ export default function PersonalPage({ visible, onExit }) {
         color: '#fafafa',
       }}
     >
-      <Starfield />
+      {personal.starfield && <Starfield />}
 
-      {/* Aurora blobs */}
-      <div className="fixed inset-0 z-[1] pointer-events-none">
-        <div className="absolute rounded-full" style={{
-          width: 700, height: 300, top: '5%', left: '-5%',
-          background: 'linear-gradient(90deg,rgba(255,0,64,0.06),rgba(255,100,0,0.03),transparent)',
-          filter: 'blur(60px)',
-          animation: 'ppAurora1 8s ease-in-out infinite alternate',
-        }} />
-        <div className="absolute rounded-full" style={{
-          width: 600, height: 250, top: '50%', right: '-5%',
-          background: 'linear-gradient(270deg,rgba(0,200,255,0.05),rgba(100,50,255,0.03),transparent)',
-          filter: 'blur(60px)',
-          animation: 'ppAurora2 10s ease-in-out infinite alternate',
-        }} />
-      </div>
+      {personal.aurora && (
+        <div className="fixed inset-0 z-[1] pointer-events-none">
+          <div className="absolute rounded-full" style={{
+            width: 700, height: 300, top: '5%', left: '-5%',
+            background: 'linear-gradient(90deg,rgba(255,0,64,0.06),rgba(255,100,0,0.03),transparent)',
+            filter: 'blur(60px)',
+            animation: 'ppAurora1 8s ease-in-out infinite alternate',
+          }} />
+          <div className="absolute rounded-full" style={{
+            width: 600, height: 250, top: '50%', right: '-5%',
+            background: 'linear-gradient(270deg,rgba(0,200,255,0.05),rgba(100,50,255,0.03),transparent)',
+            filter: 'blur(60px)',
+            animation: 'ppAurora2 10s ease-in-out infinite alternate',
+          }} />
+        </div>
+      )}
 
       {/* Corner: name */}
-      <button
-        onClick={onExit}
-        className="fixed top-4 left-4 text-[0.75rem] font-semibold z-[100] bg-transparent border-none cursor-pointer p-0"
+      <div
+        className="fixed top-4 left-4 text-[0.75rem] font-semibold z-[100]"
         style={{ fontFamily: "'SF Mono','Fira Code',monospace" }}
       >
         <span className="text-[#71717a]">Pulkit </span>
         <span
-          className="hover:text-[#fafafa]"
-          style={{
-            background: 'linear-gradient(90deg, #ff0040, #aa44ff, #00d4ff, #ff0040)',
-            backgroundSize: '300% 100%',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            animation: 'ppRgbShift 3s linear infinite',
-          }}
+          onClick={onExit}
+          className="pp-rgb-dhingra cursor-pointer"
         >
           DHINGRA
         </span>
-      </button>
-
-      {/* Corner: clock */}
-      <div className="fixed top-4 right-4 text-[0.65rem] text-[#71717a] z-[100]" style={{ fontFamily: "'SF Mono','Fira Code',monospace", fontVariantNumeric: 'tabular-nums' }}>
-        <LiveClock />
       </div>
 
-      {/* Corner: label */}
+      {/* Corner: page load time */}
+      <div className="fixed top-4 right-4 text-[0.65rem] text-[#71717a] z-[100]" style={{ fontFamily: "'SF Mono','Fira Code',monospace", fontVariantNumeric: 'tabular-nums' }}>
+        <PageLoadTime />
+      </div>
+
+      {/* Corner: screen ratio */}
+      <div className="fixed bottom-4 left-4 text-[0.65rem] text-[#71717a] z-[100]" style={{ fontFamily: "'SF Mono','Fira Code',monospace", fontVariantNumeric: 'tabular-nums' }}>
+        <ScreenRatio />
+      </div>
+
+      {/* Corner: visitor count */}
       <div className="fixed bottom-4 right-4 text-[0.65rem] text-[#71717a] z-[100]" style={{ fontFamily: "'SF Mono','Fira Code',monospace" }}>
-        the other side
+        you found the secret
       </div>
 
       {/* Main layout */}
-      <div className="min-h-screen flex items-center justify-center p-8 relative z-[2]">
-        <div className="grid gap-8 max-w-[1100px] w-full" style={{ gridTemplateColumns: '1fr 320px 1fr', animation: 'ppFadeUp 0.5s ease forwards' }}>
+      <div className="min-h-screen flex flex-col items-center justify-center p-8 relative z-[2]" style={{ animation: 'ppFadeUp 0.5s ease forwards' }}>
+        <div className="grid gap-8 max-w-[1100px] w-full items-start" style={{ gridTemplateColumns: '1fr 320px 1fr' }}>
 
-          {/* Left sidebar */}
-          <div className="grid grid-cols-2 gap-3 content-start">
-            <AnimeGraph />
-            <SportsCard />
-            <PhotographyCard />
+          {/* Left sidebar — top aligned with name (below avatar 88px + mb-5 20px) */}
+          <div className="grid grid-cols-2 gap-3 content-start pt-[108px]">
+            {personal.photography && <PhotographyCard2 />}
+            {personal.books && <BooksCard />}
+            {personal.youtube && <YouTubeCard />}
           </div>
 
-          {/* Center */}
+          {/* Center profile */}
           <div className="flex flex-col items-center text-center">
-            <img src={personalLinks.avatar} className="w-[88px] h-[88px] rounded-full mb-5 object-cover hover:opacity-80 transition-opacity" alt="Pulkit" />
+            <div className="w-[104px] h-[104px] rounded-full mb-5 overflow-hidden bg-white hover:opacity-80 transition-opacity flex items-center justify-center">
+              <img
+                src={personalLinks.avatar}
+                alt=""
+                className="w-full h-full object-cover"
+                style={{ transform: 'scale(1.2)' }}
+              />
+            </div>
             <h1 className="text-xl font-semibold tracking-[-0.02em] mb-1.5 text-[#fafafa]">300i</h1>
-            <p className="text-[#71717a] text-sm mb-2">
-              The Other Side<span className="ml-px" style={{ animation: 'ppBlink 1s step-end infinite' }}>|</span>
-            </p>
+            <TypingBio />
             <p className="text-[#71717a] text-xs mb-3" style={{ fontVariantNumeric: 'tabular-nums' }}>
               <LiveTimeShort /> &middot; IST &middot; India
             </p>
@@ -144,12 +230,13 @@ export default function PersonalPage({ visible, onExit }) {
             </div>
 
             {/* Social links */}
+            {personal.socials && (
             <nav className="flex flex-col gap-2 w-full">
               {[
-                { icon: socialIcons.telegram, label: 'Telegram', href: '#' },
-                { icon: socialIcons.email, label: 'Email', href: 'mailto:#' },
-                { icon: socialIcons.instagram, label: 'Instagram', href: '#' },
-                { icon: socialIcons.discord, label: 'Discord', href: '#' },
+                { icon: socialIcons.telegram, label: 'Telegram', href: 'https://t.me/pdx300i' },
+                { icon: socialIcons.email, label: 'Email', href: 'mailto:pulkitdhngra@gmail.com' },
+                { icon: socialIcons.instagram, label: 'Instagram', href: 'https://instagram.com/pdx300i' },
+                { icon: socialIcons.discord, label: 'Discord', href: 'https://discord.com/users/300i.zzzz' },
               ].map(link => (
                 <a
                   key={link.label}
@@ -164,20 +251,28 @@ export default function PersonalPage({ visible, onExit }) {
                 </a>
               ))}
             </nav>
-
-            <footer className="mt-10 pt-6 border-t border-[#27272a] flex items-center justify-center gap-1 text-xs text-[#71717a] w-full">
-              &copy; 2026 &middot; <a href="#" className="text-[#71717a] no-underline hover:text-[#fafafa] transition-colors">300i</a> &middot; <span>the other side</span>
-            </footer>
+            )}
           </div>
 
-          {/* Right sidebar */}
-          <div className="grid grid-cols-2 gap-3 content-start">
-            <GamesCard />
-            <AnimeCard />
-            <MusicCard />
+          {/* Right sidebar — top aligned with name */}
+          <div className="grid grid-cols-2 gap-3 content-start pt-[108px]">
+            {personal.games && <GamesCard />}
+            {personal.anime && <AnimeCard />}
+            {personal.music && <MusicCard />}
           </div>
 
         </div>
+
+        <footer className="max-w-[1100px] w-full mt-16 pt-6 border-t border-[#27272a] flex items-center justify-between text-xs text-[#71717a]">
+          <span>&copy; 2026 &middot; 300i</span>
+          <button
+            onClick={onExit}
+            className="inline-flex items-center gap-1.5 text-[#71717a] hover:text-[#fafafa] transition-colors bg-transparent border border-[#27272a] hover:border-[#3f3f46] rounded-full px-3 py-1.5 cursor-pointer text-xs"
+          >
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            back to portfolio
+          </button>
+        </footer>
       </div>
     </div>
   )
