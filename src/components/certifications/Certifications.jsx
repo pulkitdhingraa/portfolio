@@ -40,7 +40,7 @@ function CertBadge({ cert, type }) {
     ? { href: cert.url, target: '_blank', rel: 'noopener noreferrer' }
     : {}
   return (
-    <Wrapper {...wrapperProps} className="group relative cursor-pointer no-underline">
+    <Wrapper {...wrapperProps} className="group relative cursor-pointer no-underline flex flex-col items-center w-20 md:w-auto">
       <div
         className={`w-20 h-20 rounded-full overflow-hidden flex items-center justify-center transition-all duration-300 ease-[cubic-bezier(.22,.68,0,.98)]
           group-hover:-translate-y-1.5 group-hover:scale-[1.08]
@@ -61,7 +61,13 @@ function CertBadge({ cert, type }) {
           />
         )}
       </div>
-      <div className="absolute bottom-[calc(100%+12px)] left-1/2 -translate-x-1/2 translate-y-1 bg-[#1A1A1A] text-white px-3.5 py-2 rounded-lg text-xs font-semibold whitespace-nowrap pointer-events-none opacity-0 transition-all duration-200 group-hover:opacity-100 group-hover:translate-y-0 z-10">
+      {/* Mobile: always-visible label below badge */}
+      <div className="md:hidden mt-2 text-center w-20">
+        <div className="text-[10px] font-semibold leading-tight text-[#1A1A1A]">{cert.name}</div>
+        <div className="text-[9px] text-gray-400 mt-0.5">{cert.issuer}</div>
+      </div>
+      {/* Desktop: hover tooltip */}
+      <div className="hidden md:block absolute bottom-[calc(100%+12px)] left-1/2 -translate-x-1/2 translate-y-1 bg-[#1A1A1A] text-white px-3.5 py-2 rounded-lg text-xs font-semibold whitespace-nowrap pointer-events-none opacity-0 transition-all duration-200 group-hover:opacity-100 group-hover:translate-y-0 z-10">
         {cert.name}
         <span className="block text-[10px] font-normal text-gray-400 mt-0.5">{cert.issuer}</span>
         <div className="absolute top-full left-1/2 -translate-x-1/2 border-[5px] border-transparent border-t-[#1A1A1A]" />
